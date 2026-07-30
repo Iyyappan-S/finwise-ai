@@ -20,6 +20,7 @@ exports.register = async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      role: "user", // Default role is "user"
     });
 
     res.status(201).json({
@@ -63,19 +64,41 @@ exports.login = async (req, res) => {
     }
 
     const token = jwt.sign(
-      { id: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: "1d" }
-    );
+
+    {
+
+        id:user._id,
+
+        role:user.role
+
+    },
+
+    process.env.JWT_SECRET,
+
+    {
+
+        expiresIn:"365d"
+
+    }
+
+);
 
     res.status(200).json({
       message: "Login successful",
       token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-      },
+      user:{
+
+    id:user._id,
+
+    name:user.name,
+
+    email:user.email,
+
+    role:user.role,
+
+    
+
+},
     });
   } catch (error) {
     console.error("Login error:", error);
@@ -97,10 +120,18 @@ exports.getProfile = async (req, res) => {
     }
 
     res.status(200).json({
-      name: user.name,
-      email: user.email,
-      joinedAt: user.createdAt,
-    });
+
+    id:user._id,
+
+    name:user.name,
+
+    email:user.email,
+
+    role:user.role,
+
+    joinedAt:user.createdAt
+
+});
   } catch (error) {
     console.error("Get profile error:", error);
 

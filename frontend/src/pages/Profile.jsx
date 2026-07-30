@@ -1,135 +1,154 @@
 import { useEffect, useState } from "react";
 import API from "../api/axios";
-import Layout from "../components/Layout";
+import "./Profile.css";
 
 function Profile() {
-  const [profile, setProfile] = useState({
-    name: "",
-    email: "",
-  });
+    const [user, setUser] = useState({
+        name: "",
+        email: "",
+        profileImage: ""
+    });
 
-  const [summary, setSummary] = useState({
-    totalIncome: 0,
-    totalExpense: 0,
-    balance: 0,
-  });
+    const [password, setPassword] = useState({
+        oldPassword: "",
+        newPassword: ""
+    });
 
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+    useEffect(() => {
+        loadProfile();
+    }, []);
 
-  useEffect(() => {
-    fetchProfileData();
-  }, []);
+    const loadProfile = async () => {
+        try {
+            const res = await API.get("/profile");
+            setUser(res.data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
-  const fetchProfileData = async () => {
-    try {
-      setLoading(true);
-      setError("");
+    const updateProfile = async (e) => {
+        e.preventDefault();
 
-      const [profileResponse, dashboardResponse] = await Promise.all([
-        API.get("/auth/profile"),
-        API.get("/dashboard"),
-      ]);
+        try {
+            await API.put("/profile", {
+                name: user.name,
+                profileImage: user.profileImage
+            });
 
-      setProfile(profileResponse.data);
-      setSummary(dashboardResponse.data);
-    } catch (error) {
-      console.error("Profile loading failed:", error);
+            alert("Profile Updated Successfully ✅");
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
-      setError(
-        error.response?.data?.message ||
-          "Unable to load profile information."
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
+    const changePassword = async (e) => {
+        e.preventDefault();
 
-  if (loading) {
+        try {
+            await API.put("/profile/change-password", password);
+
+            alert("Password Changed Successfully 🔒");
+
+            setPassword({
+                oldPassword: "",
+                newPassword: ""
+            });
+
+        } catch (err) {
+            alert(err.response?.data?.message || "Password Change Failed");
+        }
+    };
+
     return (
-      <Layout>
-        <p className="text-slate-600">Loading profile...</p>
-      </Layout>
-    );
-  }
+        <div className="profile-page">
 
-  return (
-    <Layout>
-      <div className="mx-auto max-w-5xl">
-        <h1 className="mb-2 text-3xl font-bold text-slate-900">
-          My Profile
-        </h1>
+            <h1>👤 My Profile</h1>
 
-        <p className="mb-6 text-slate-600">
-          View your account and financial information.
-        </p>
-
-        {error && (
-          <p className="mb-5 rounded-lg bg-red-50 p-3 text-red-600">
-            {error}
-          </p>
-        )}
-
-        <div className="rounded-2xl bg-white p-6 shadow">
-          <div className="flex items-center gap-5">
-            <div className="flex h-20 w-20 items-center justify-center rounded-full bg-blue-600 text-3xl font-bold text-white">
-              {profile.name
-                ? profile.name.charAt(0).toUpperCase()
-                : "U"}
-            </div>
-
-            <div>
-              <h2 className="text-2xl font-bold text-slate-900">
-                {profile.name || "User"}
-              </h2>
-
-              <p className="text-slate-600">
-                {profile.email || "Email unavailable"}
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-6 grid gap-5 md:grid-cols-3">
-          <div className="rounded-2xl bg-white p-6 shadow">
-            <p className="text-sm font-semibold text-slate-500">
-              Total Income
-            </p>
-
-            <h3 className="mt-2 text-2xl font-bold text-green-600">
-              ₹{Number(summary.totalIncome || 0).toLocaleString("en-IN")}
-            </h3>
-          </div>
-
-          <div className="rounded-2xl bg-white p-6 shadow">
-            <p className="text-sm font-semibold text-slate-500">
-              Total Expense
-            </p>
-
-            <h3 className="mt-2 text-2xl font-bold text-red-600">
-              ₹{Number(summary.totalExpense || 0).toLocaleString("en-IN")}
-            </h3>
-          </div>
-
-          <div className="rounded-2xl bg-white p-6 shadow">
-            <p className="text-sm font-semibold text-slate-500">
-              Current Balance
-            </p>
-
-            <h3
-              className={`mt-2 text-2xl font-bold ${
-                summary.balance >= 0
-                  ? "text-blue-600"
-                  : "text-red-600"
-              }`}
+            <form
+                className="profile-card"
+                onSubmit={updateProfile}
             >
-              ₹{Number(summary.balance || 0).toLocaleString("en-IN")}
-            </h3>
-          </div>
+
+                <label>Name</label>
+
+                <input
+                    type="text"
+                    value={user.name}
+                    onChange={(e) =>
+                        setUser({
+                            ...user,
+                            name: e.target.value
+                        })
+                    }
+                />
+
+                <label>Email</label>
+
+                <input
+                    type="email"
+                    value={user.email}
+                    disabled
+                />
+
+                <label>Profile Image URL</label>
+
+                <input
+                    type="text"
+                    value={user.profileImage}
+                    onChange={(e) =>
+                        setUser({
+                            ...user,
+                            profileImage: e.target.value
+                        })
+                    }
+                />
+
+                <button type="submit">
+                    Save Profile
+                </button>
+
+            </form>
+
+            <form
+                className="profile-card"
+                onSubmit={changePassword}
+            >
+
+                <h2>🔐 Change Password</h2>
+
+                <input
+                    type="password"
+                    placeholder="Old Password"
+                    value={password.oldPassword}
+                    onChange={(e) =>
+                        setPassword({
+                            ...password,
+                            oldPassword: e.target.value
+                        })
+                    }
+                />
+
+                <input
+                    type="password"
+                    placeholder="New Password"
+                    value={password.newPassword}
+                    onChange={(e) =>
+                        setPassword({
+                            ...password,
+                            newPassword: e.target.value
+                        })
+                    }
+                />
+
+                <button type="submit">
+                    Change Password
+                </button>
+
+            </form>
+
         </div>
-      </div>
-    </Layout>
-  );
+    );
 }
 
 export default Profile;

@@ -1,83 +1,99 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
-  FaHome,
-  FaMoneyBillWave,
-  FaWallet,
-  FaChartPie,
-  FaRobot,
-  FaUser,
-  FaSignOutAlt
+    FaHome,
+    FaMoneyBillWave,
+    FaWallet,
+    FaChartBar,
+    FaBullseye,
+    FaBell,
+    FaCog,
+    FaUser,
+    FaFileAlt,
+    FaUserShield,
+    FaTimes
 } from "react-icons/fa";
 
-function Sidebar() {
-  const navigate = useNavigate();
+import "./Sidebar.css";
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
+function Sidebar({ open, setOpen, role }) {
 
-  const linkClass = ({ isActive }) =>
-    `flex items-center gap-3 rounded-xl px-4 py-3 transition ${
-      isActive
-        ? "bg-blue-600 text-white"
-        : "text-slate-300 hover:bg-slate-700 hover:text-white"
-    }`;
+    return (
+        <>
+            {open && (
+                <div
+                    className="sidebar-overlay"
+                    onClick={() => setOpen(false)}
+                />
+            )}
 
-  return (
-    <aside className="min-h-screen w-64 bg-slate-900 p-5">
-      <div className="mb-10">
-        <h1 className="text-2xl font-bold text-white">
-          FinWise AI
-        </h1>
+            <aside className={`sidebar ${open ? "show" : ""}`}>
 
-        <p className="mt-1 text-sm text-slate-400">
-          Smart Finance Manager
-        </p>
-      </div>
+                <div className="sidebar-top">
 
-      <nav className="space-y-2">
-        <NavLink to="/dashboard" className={linkClass}>
-          <FaHome />
-          Dashboard
-        </NavLink>
+                    <h2>💰 FinWise AI</h2>
 
-        <NavLink to="/income" className={linkClass}>
-          <FaMoneyBillWave />
-          Income
-        </NavLink>
+                    <button
+                        className="close-btn"
+                        onClick={() => setOpen(false)}
+                    >
+                        <FaTimes />
+                    </button>
 
-        <NavLink to="/expense" className={linkClass}>
-          <FaWallet />
-          Expense
-        </NavLink>
+                </div>
 
-        <NavLink to="/analytics" className={linkClass}>
-          <FaChartPie />
-          Analytics
-        </NavLink>
+                <nav>
 
-        <NavLink to="/ai" className={linkClass}>
-          <FaRobot />
-          AI Advisor
-        </NavLink>
+                    <Link to="/dashboard" onClick={() => setOpen(false)}>
+                        <FaHome /> Dashboard
+                    </Link>
 
-        <NavLink to="/profile" className={linkClass}>
-          <FaUser />
-          Profile
-        </NavLink>
-      </nav>
+                    <Link to="/add-income" onClick={() => setOpen(false)}>
+                        <FaMoneyBillWave /> Add Income
+                    </Link>
 
-      <button
-        onClick={handleLogout}
-        className="mt-10 flex w-full items-center gap-3 rounded-xl px-4 py-3 text-red-400 transition hover:bg-red-500 hover:text-white"
-      >
-        <FaSignOutAlt />
-        Logout
-      </button>
-    </aside>
-  );
+                    <Link to="/add-expense" onClick={() => setOpen(false)}>
+                        <FaWallet /> Add Expense
+                    </Link>
+
+                    <Link to="/analytics" onClick={() => setOpen(false)}>
+                        <FaChartBar /> Analytics
+                    </Link>
+
+                    <Link to="/budget" onClick={() => setOpen(false)}>
+                        💰 Budget
+                    </Link>
+
+                    <Link to="/goals" onClick={() => setOpen(false)}>
+                        <FaBullseye /> Goals
+                    </Link>
+
+                    <Link to="/reports" onClick={() => setOpen(false)}>
+                        <FaFileAlt /> Reports
+                    </Link>
+
+                    <Link to="/notifications" onClick={() => setOpen(false)}>
+                        <FaBell /> Notifications
+                    </Link>
+
+                    <Link to="/settings" onClick={() => setOpen(false)}>
+                        <FaCog /> Settings
+                    </Link>
+
+                    <Link to="/profile" onClick={() => setOpen(false)}>
+                        <FaUser /> Profile
+                    </Link>
+
+                    {role === "admin" && (
+                        <Link to="/admin/dashboard" onClick={() => setOpen(false)}>
+                            <FaUserShield /> Admin Panel
+                        </Link>
+                    )}
+
+                </nav>
+
+            </aside>
+        </>
+    );
 }
 
 export default Sidebar;

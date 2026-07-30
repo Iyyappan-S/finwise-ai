@@ -1,0 +1,101 @@
+.reports-page{
+
+    padding:30px;
+
+}
+
+.report-filter{
+
+    display:flex;
+
+    gap:15px;
+
+    margin:25px 0;
+
+}
+
+.report-filter select,
+.report-filter input,
+.report-filter button{
+
+    padding:10px 15px;
+
+    border-radius:10px;
+
+    border:1px solid #ddd;
+
+}
+
+.report-filter button{
+
+    background:#2563eb;
+
+    color:white;
+
+    cursor:pointer;
+
+}
+
+.report-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+    margin-top:30px;
+
+}
+
+.report-card{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    text-align:center;
+
+}
+
+.report-card h3{
+
+    color:#666;
+
+    margin-bottom:10px;
+
+}
+
+.report-card h2{
+
+    font-size:32px;
+
+}
+
+.income{
+
+    border-left:6px solid #22c55e;
+
+}
+
+.expense{
+
+    border-left:6px solid #ef4444;
+
+}
+
+.saving{
+
+    border-left:6px solid #3b82f6;
+
+}
+
+.category{
+
+    border-left:6px solid #f59e0b;
+
+}

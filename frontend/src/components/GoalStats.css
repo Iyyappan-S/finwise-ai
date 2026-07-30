@@ -1,0 +1,49 @@
+.goal-stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:20px;
+
+    margin:30px 0;
+
+}
+
+.goal-stat-card{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.goal-stat-card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.goal-stat-card h3{
+
+    color:#666;
+
+    margin-bottom:10px;
+
+}
+
+.goal-stat-card h2{
+
+    color:#2563eb;
+
+    font-size:28px;
+
+}

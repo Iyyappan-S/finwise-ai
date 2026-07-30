@@ -1,54 +1,117 @@
 import { useEffect, useState } from "react";
-import API from "../api/axios";
-import Layout from "../components/Layout";
-import MonthlyBarChart from "../components/MonthlyBarChart";
-import CategoryPieChart from "../components/CategoryPieChart";
-import BalanceLineChart from "../components/BalanceLineChart";
 
-function Analytics() {
-  const [monthlyData, setMonthlyData] = useState([]);
-  const [categoryData, setCategoryData] = useState([]);
+import api from "../api/axios";
 
-  const fetchMonthlyAnalytics = async () => {
-    try {
-      const response = await API.get("/analytics/monthly");
-      setMonthlyData(response.data.analytics || []);
-    } catch (error) {
-      console.error("Failed to fetch monthly analytics:", error);
-    }
-  };
+import Sidebar from "../components/Sidebar";
 
-  const fetchCategoryAnalytics = async () => {
-    try {
-      const response = await API.get("/analytics/category");
-      setCategoryData(response.data.analytics || []);
-    } catch (error) {
-      console.error("Failed to fetch category analytics:", error);
-    }
-  };
+import MonthlyChart from "../components/MonthlyChart";
 
-  useEffect(() => {
-    fetchMonthlyAnalytics();
-    fetchCategoryAnalytics();
-  }, []);
+import ExpensePieChart from "../components/ExpensePieChart";
 
-  return (
-    <Layout>
-      <h1 className="mb-6 text-3xl font-bold">
-        Analytics Dashboard
-      </h1>
+import "../styles/dashboard.css";
 
-      <div className="space-y-6">
-        <MonthlyBarChart data={monthlyData} />
+import InsightCard from "../components/InsightCard";
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <CategoryPieChart data={categoryData} />
 
-          <BalanceLineChart data={monthlyData} />
+
+function Analytics(){
+
+
+    const [monthly,setMonthly]=useState([]);
+
+    const [category,setCategory]=useState([]);
+
+
+
+
+    useEffect(()=>{
+
+
+        const fetchData = async()=>{
+
+
+            try{
+
+
+                const monthlyRes =
+                await api.get("/analytics/monthly");
+
+
+
+                const categoryRes =
+                await api.get("/analytics/category");
+
+
+
+                setMonthly(
+                    monthlyRes.data.analytics || []
+                );
+
+
+
+                setCategory(
+                    categoryRes.data.analytics || []
+                );
+
+
+
+            }
+            catch(error){
+
+                console.log(error);
+
+            }
+
+
+        };
+
+
+
+        fetchData();
+
+
+    },[]);
+
+
+
+const totalIncome = monthly.reduce(
+    (sum, item) => sum + item.income,
+    0
+);
+
+const totalExpense = monthly.reduce(
+    (sum, item) => sum + item.expense,
+    0
+);
+    
+    return(
+
+    <div className="layout">
+
+        <Sidebar/>
+
+        <div className="dashboard">
+
+            <h1>📊 Analytics Dashboard</h1>
+
+            <MonthlyChart data={monthly}/>
+
+            <ExpensePieChart data={category}/>
+
+            <InsightCard
+                income={totalIncome}
+                expense={totalExpense}
+                category={category}
+            />
+
         </div>
-      </div>
-    </Layout>
-  );
+
+    </div>
+
+)
+
+
 }
+
 
 export default Analytics;

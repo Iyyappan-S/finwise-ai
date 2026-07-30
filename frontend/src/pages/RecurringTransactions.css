@@ -1,0 +1,46 @@
+.recurring-page{
+    padding:30px;
+}
+
+.recurring-form{
+    display:grid;
+    gap:15px;
+    margin-bottom:30px;
+}
+
+.recurring-form input,
+.recurring-form textarea,
+.recurring-form select{
+    padding:10px;
+    border-radius:8px;
+}
+
+.recurring-form button{
+    padding:12px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.process-btn{
+    margin-bottom:25px;
+    background:#16a34a;
+    color:white;
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+}
+
+.recurring-list{
+    display:grid;
+    gap:20px;
+}
+
+.recurring-card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,.1);
+}

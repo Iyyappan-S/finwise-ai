@@ -1,0 +1,35 @@
+.notification-dropdown{
+
+    position:absolute;
+
+    top:50px;
+
+    right:0;
+
+    width:320px;
+
+    background:white;
+
+    border-radius:12px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.15);
+
+    padding:15px;
+
+    z-index:999;
+
+}
+
+.dropdown-item{
+
+    padding:10px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.dropdown-item:last-child{
+
+    border-bottom:none;
+
+}

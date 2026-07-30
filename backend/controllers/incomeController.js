@@ -1,13 +1,20 @@
 const Income = require("../models/Income");
 
 // Add Income
-const addIncome = async (req, res) => {
+exports.addIncome = async (req, res) => {
     try {
-        const { source, amount, category, date, description } = req.body;
+
+        const {
+            title,
+            amount,
+            category,
+            date,
+            description
+        } = req.body;
 
         const income = await Income.create({
             user: req.user.id,
-            source,
+            title,
             amount,
             category,
             date,
@@ -20,33 +27,43 @@ const addIncome = async (req, res) => {
         });
 
     } catch (error) {
+
         res.status(500).json({
             message: error.message
         });
+
     }
 };
 
-// Get All Income
-const getIncome = async (req, res) => {
+
+// Get Income
+exports.getIncome = async (req, res) => {
+
     try {
-        const incomes = await Income.find({
+
+        const income = await Income.find({
             user: req.user.id
-        }).sort({ date: -1 });
+        }).sort({
+            date: -1
+        });
 
         res.json({
-            count: incomes.length,
-            incomes
+            count: income.length,
+            income
         });
 
     } catch (error) {
+
         res.status(500).json({
             message: error.message
         });
+
     }
 };
 
+
 // Update Income
-const updateIncome = async (req, res) => {
+exports.updateIncome = async (req, res) => {
 
     try {
 
@@ -56,9 +73,11 @@ const updateIncome = async (req, res) => {
         });
 
         if (!income) {
+
             return res.status(404).json({
                 message: "Income not found"
             });
+
         }
 
         const updatedIncome = await Income.findByIdAndUpdate(
@@ -69,7 +88,7 @@ const updateIncome = async (req, res) => {
 
         res.json({
             message: "Income updated successfully",
-            updatedIncome
+            income: updatedIncome
         });
 
     } catch (error) {
@@ -82,18 +101,23 @@ const updateIncome = async (req, res) => {
 
 };
 
+
 // Delete Income
-const deleteIncome = async (req, res) => {
+exports.deleteIncome = async (req, res) => {
+
     try {
+
         const income = await Income.findOne({
             _id: req.params.id,
             user: req.user.id
         });
 
         if (!income) {
+
             return res.status(404).json({
                 message: "Income not found"
             });
+
         }
 
         await Income.findByIdAndDelete(req.params.id);
@@ -103,15 +127,12 @@ const deleteIncome = async (req, res) => {
         });
 
     } catch (error) {
+
         res.status(500).json({
             message: error.message
         });
+
     }
+
 };
 
-module.exports = {
-    addIncome,
-    getIncome,
-    updateIncome,
-    deleteIncome
-};

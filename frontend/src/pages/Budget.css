@@ -1,0 +1,65 @@
+.budget-page{
+
+    padding:30px;
+
+}
+
+.budget-page form{
+
+    display:flex;
+    gap:15px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+
+}
+
+.budget-page input{
+
+    padding:12px;
+    border-radius:10px;
+    border:1px solid #ddd;
+
+}
+
+.budget-page button{
+
+    padding:12px 20px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:#2563EB;
+    color:white;
+
+}
+
+.budget-card{
+
+    background:white;
+    margin:15px 0;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.budget-buttons{
+
+    display:flex;
+    gap:15px;
+    margin-top:15px;
+
+}
+
+.edit-btn{
+
+    background:#10B981;
+    color:white;
+
+}
+
+.delete-btn{
+
+    background:#EF4444;
+    color:white;
+
+}

@@ -1,0 +1,75 @@
+.content{
+
+    margin-left:270px;
+
+    padding:20px;
+
+}
+
+.mobile-header{
+
+    display:none;
+
+}
+
+.menu-btn{
+
+    background:none;
+
+    border:none;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+}
+
+@media(max-width:768px){
+
+.mobile-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px 20px;
+
+    background:#111827;
+
+    color:white;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:997;
+
+}
+
+.content{
+
+    margin-left:0;
+
+    padding:20px;
+
+}
+
+}
+
+@media(min-width:769px){
+
+.sidebar{
+
+    transform:none !important;
+
+}
+
+.sidebar-overlay{
+
+    display:none;
+
+}
+
+}

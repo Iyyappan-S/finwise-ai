@@ -1,81 +1,139 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import {useState} from "react";
 import API from "../api/axios";
+import {useNavigate} from "react-router-dom";
 
-function Register() {
-  const navigate = useNavigate();
 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: ""
-  });
+function Register(){
 
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value
-    });
-  };
+const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
 
-    try {
-      await API.post("/auth/register", form);
-      alert("Registration successful");
-      navigate("/");
-    } catch (error) {
-      alert(error.response?.data?.message || "Registration failed");
-    }
-  };
+const [form,setForm]=useState({
 
-  return (
-    <div>
-      <h1>FinWise AI Register</h1>
+name:"",
+email:"",
+password:""
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Enter Name"
-          value={form.name}
-          onChange={handleChange}
-          required
-        />
+});
 
-        <br /><br />
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Enter Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
+const handleChange=(e)=>{
 
-        <br /><br />
+setForm({
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Enter Password"
-          value={form.password}
-          onChange={handleChange}
-          required
-        />
+...form,
 
-        <br /><br />
+[e.target.name]:e.target.value
 
-        <button type="submit">Register</button>
-      </form>
+});
 
-      <p>
-        Already have an account? <Link to="/">Login</Link>
-      </p>
-    </div>
-  );
+};
+
+
+
+const handleSubmit=async(e)=>{
+
+e.preventDefault();
+
+
+try{
+
+
+await API.post(
+"/auth/register",
+form
+);
+
+
+alert("Registration Successful");
+
+
+navigate("/");
+
+
 }
+catch(error){
+
+console.log(error);
+
+alert(
+error.response?.data?.message ||
+"Registration failed"
+);
+
+}
+
+
+};
+
+
+
+return (
+
+<div>
+
+<h1>
+FinWise AI Register Page
+</h1>
+
+
+<form onSubmit={handleSubmit}>
+
+
+<input
+
+name="name"
+
+placeholder="Name"
+
+onChange={handleChange}
+
+/>
+
+
+
+<input
+
+name="email"
+
+placeholder="Email"
+
+onChange={handleChange}
+
+/>
+
+
+
+<input
+
+name="password"
+
+type="password"
+
+placeholder="Password"
+
+onChange={handleChange}
+
+/>
+
+
+
+<button>
+
+Register
+
+</button>
+
+
+</form>
+
+
+</div>
+
+);
+
+
+}
+
 
 export default Register;

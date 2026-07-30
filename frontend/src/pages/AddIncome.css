@@ -1,0 +1,191 @@
+.income-page{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:linear-gradient(135deg,#ecfdf5,#d1fae5);
+
+    padding:40px;
+
+}
+
+.income-card{
+
+    width:100%;
+
+    max-width:650px;
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:40px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.1);
+
+}
+
+.income-header{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+.income-icon{
+
+    font-size:65px;
+
+    color:#10b981;
+
+    margin-bottom:15px;
+
+}
+
+.income-header h1{
+
+    font-size:34px;
+
+    color:#111827;
+
+}
+
+.income-header p{
+
+    color:#6b7280;
+
+    margin-top:8px;
+
+}
+
+.income-form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
+}
+
+.input-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.input-group label{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#374151;
+
+}
+
+.input-group input,
+
+.input-group select{
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:1px solid #d1d5db;
+
+    font-size:16px;
+
+    transition:.3s;
+
+    outline:none;
+
+}
+
+.input-group input:focus,
+
+.input-group select:focus{
+
+    border-color:#10b981;
+
+    box-shadow:0 0 12px rgba(16,185,129,.3);
+
+}
+
+.income-btn{
+
+    margin-top:15px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#10b981,#059669);
+
+    color:white;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.income-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 25px rgba(16,185,129,.35);
+
+}
+
+.income-btn:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+}
+
+@media(max-width:768px){
+
+.income-card{
+
+    padding:25px;
+
+}
+
+.income-header h1{
+
+    font-size:28px;
+
+}
+
+}

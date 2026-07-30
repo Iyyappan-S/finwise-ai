@@ -1,0 +1,39 @@
+.settings-page{
+    padding:30px;
+}
+
+.settings-card{
+    margin-top:20px;
+    max-width:400px;
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.settings-card h2{
+    margin-bottom:15px;
+}
+
+.settings-card select{
+    width:100%;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:20px;
+    font-size:16px;
+}
+
+.save-btn{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.save-btn:hover{
+    background:#1d4ed8;
+}
