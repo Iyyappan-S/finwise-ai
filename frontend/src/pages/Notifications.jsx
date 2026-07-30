@@ -3,6 +3,7 @@ import API from "../api/axios";
 import "./Notifications.css";
 import { useNotifications } from "../context/NotificationContext";
 
+
 function Notifications() {
 
 const {
@@ -12,9 +13,17 @@ const {
     loadNotifications
 
 } = useNotifications();
-    useEffect(() => {
-        loadNotifications();
-    }, []);
+const navigate = useNavigate();
+   useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        navigate("/login");
+        return;
+    }
+
+    loadNotifications();
+}, [navigate]);
 
     
 

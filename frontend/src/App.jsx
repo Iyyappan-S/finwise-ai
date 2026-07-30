@@ -14,6 +14,7 @@ import Notifications from "./pages/Notifications";
 import Goals from "./pages/Goals";
 import Reports from "./pages/Reports";
 import AdminDashboard from "./pages/AdminDashboard";
+import { Navigate } from "react-router-dom";
 
 import MainLayout from "./layouts/MainLayout";
 
@@ -24,10 +25,17 @@ return(
 
 <BrowserRouter>
 
+
+
 <Routes>
 
 
 {/* Public Routes */}
+
+<Route
+  path="/"
+  element={<Navigate to="/login" replace />}
+/>
 
 <Route 
 path="/login" 
