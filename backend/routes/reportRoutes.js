@@ -3,7 +3,7 @@ const express = require("express");
 const {
     generateMonthlyReport,
     getFinancialSummary
-} = require("../controllers/reportController");
+} = require("../controllers/reportController_TEMP.js");
 
 const protect = require("../middleware/authMiddleware");
 
