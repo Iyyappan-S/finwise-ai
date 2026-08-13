@@ -1,5 +1,4 @@
 # 💰 FinWise AI
-
 FinWise AI is a full-stack AI-powered personal finance management application that helps users manage their finances efficiently. It enables users to track income and expenses, monitor budgets, set savings goals, analyze spending patterns, and generate financial reports through an intuitive dashboard.
 
 ## 🚀 Features
