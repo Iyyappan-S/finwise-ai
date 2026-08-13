@@ -33,7 +33,6 @@ FinWise AI is a full-stack AI-powered personal finance management application th
 - bcrypt.js
 
 ## 📂 Project Structure
-
 ```
 FinWise-AI/
 │
