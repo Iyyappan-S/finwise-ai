@@ -1,9 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 
-// =========================
-// Get User Profile
-// =========================
+
 const getProfile = async (req, res) => {
     try {
 
