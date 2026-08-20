@@ -3,9 +3,6 @@ const Expense = require("../models/Expense");
 const createNotification = require("../utils/createNotification");
 const convertForUser = require("../utils/userCurrency");
 
-// ===============================
-// Add Budget
-// ===============================
 const addBudget = async (req, res) => {
     try {
 
