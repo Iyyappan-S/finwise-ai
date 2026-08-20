@@ -18,9 +18,7 @@ const getProfile = async (req, res) => {
     }
 };
 
-// =========================
-// Update Profile
-// =========================
+
 const updateProfile = async (req, res) => {
     try {
 
